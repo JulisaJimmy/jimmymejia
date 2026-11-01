@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julisa & Jimmy | Nuestra boda</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <main class="invitacion">
+        <section class="portada">
+            <p class="sobrelinea">CON LA BENDICIÓN DE DIOS</p>
+            <h1>Julisa <span>&</span> Jimmy</h1>
+            <p class="fecha" id="fecha"></p>
+
+            <img id="fotoPareja" class="foto" alt="Jimmy y Julisa">
+
+            <p class="frase">
+                «Mejores son dos que uno».
+                <br> Eclesiastés 4:9
+            </p>
+        </section>
+
+        <section class="seccion">
+            <h2>¡Nos casamos!</h2>
+            <p>Nos llena de alegría compartir contigo este día tan especial.</p>
+            <div id="cuentaRegresiva"></div>
+        </section>
+
+        <section class="seccion">
+            <h2>La ceremonia</h2>
+            <p id="horaCeremonia"></p>
+            <h3 id="lugarCeremonia"></h3>
+            <p id="direccionCeremonia"></p>
+            <a id="mapaCeremonia" target="_blank" rel="noopener">
+        Ver ubicación en Google Maps
+      </a>
+        </section>
+
+        <section class="seccion">
+            <h2>La recepción</h2>
+            <p id="horaRecepcion"></p>
+            <h3 id="lugarRecepcion"></h3>
+            <p id="direccionRecepcion"></p>
+            <a id="mapaRecepcion" target="_blank" rel="noopener">
+        Ver ubicación en Google Maps
+      </a>
+        </section>
+
+        <section class="seccion">
+            <h2>Un detalle especial</h2>
+            <p>
+                Agradeceremos mucho si desean tener un detalle con nosotros o expresar sus muestras de cariño en un sobre cerrado.
+            </p>
+        </section>
+
+        <section class="seccion">
+            <h2>Confirma tu asistencia</h2>
+
+            <form id="formularioRSVP">
+                <input name="nombre" placeholder="Nombre completo" required>
+
+                <select name="asistencia" required>
+          <option value="">¿Nos acompañarás?</option>
+          <option value="Sí asistiré">Sí, asistiré</option>
+          <option value="No podré asistir">No podré asistir</option>
+        </select>
+
+                <input name="personas" type="number" min="1" max="10" value="1" required placeholder="Número de personas">
+
+                <button type="submit">Enviar confirmación</button>
+                <p id="mensajeRSVP" role="status"></p>
+            </form>
+        </section>
+
+        <section class="seccion">
+            <p class="frase">
+                «El amor nunca deja de ser».
+                <br> 1 Corintios 13:8
+            </p>
+            <p>¡Te esperamos!</p>
+            <h2>Julisa & Jimmy</h2>
+        </section>
+    </main>
+
+    <audio id="musica" loop></audio>
+    <button id="botonMusica" type="button">♪ Música</button>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #eee7dc;
+    color: #554638;
+    font-family: Georgia, serif;
+    text-align: center;
+}
+
+.invitacion {
+    width: min(100%, 760px);
+    margin: auto;
+    background: #faf7f0;
+    min-height: 100vh;
+    padding: 35px 22px;
+}
+
+.portada {
+    padding: 55px 15px 40px;
+    border: 1px solid #c7ad7c;
+}
+
+.sobrelinea {
+    letter-spacing: 4px;
+    font-size: 12px;
+}
+
+h1 {
+    font-size: clamp(38px, 8vw, 68px);
+    font-weight: normal;
+    color: #9b7b48;
+    margin: 20px 0;
+}
+
+h1 span {
+    font-style: italic;
+}
+
+.fecha {
+    letter-spacing: 3px;
+}
+
+.foto {
+    width: min(100%, 420px);
+    max-height: 520px;
+    object-fit: cover;
+    margin: 25px auto;
+    border-radius: 3px;
+}
+
+.seccion {
+    padding: 48px 12px;
+    border-bottom: 1px solid #ddcfb7;
+}
+
+h2 {
+    color: #9b7b48;
+    font-size: 30px;
+    font-weight: normal;
+}
+
+h3 {
+    font-weight: normal;
+}
+
+.frase {
+    font-style: italic;
+    line-height: 1.8;
+}
+
+a {
+    display: inline-block;
+    margin: 12px;
+    color: #896b3e;
+}
+
+input,
+select,
+button {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    margin: 12px auto;
+    padding: 14px;
+    border: 1px solid #c7ad7c;
+    background: #fffdf8;
+    color: #554638;
+    font: inherit;
+}
+
+button {
+    background: #9b7b48;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+#botonMusica {
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    width: auto;
+    border-radius: 30px;
+    padding: 12px 20px;
+}
+
+#cuentaRegresiva {
+    font-size: 20px;
+    color: #9b7b48;
+    margin-top: 20px;
+}
+
+@media (max-width: 480px) {
+    .invitacion {
+        padding: 15px 12px;
+    }
+    .portada {
+        padding: 40px 10px;
+    }
+}
