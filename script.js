@@ -5,6 +5,7 @@ const $ = (id) => document.getElementById(id);
 // ======================================
 
 function mostrarRecepcion(datos) {
+
     $("horaRecepcion").textContent = datos.hora ?
         `Hora: ${datos.hora}` :
         "Hora por confirmar";
@@ -23,12 +24,16 @@ function mostrarRecepcion(datos) {
             "");
 
     if (urlMapa) {
+
         enlace.href = urlMapa;
         enlace.hidden = false;
         enlace.target = "_blank";
         enlace.rel = "noopener noreferrer";
+
     } else {
+
         enlace.hidden = true;
+
     }
 }
 
@@ -37,12 +42,15 @@ function mostrarRecepcion(datos) {
 // ======================================
 
 function actualizarCuentaRegresiva() {
+
     const destino = new Date(CONFIG.fechaBoda).getTime();
     const diferencia = destino - Date.now();
 
     if (diferencia <= 0) {
+
         $("cuentaRegresiva").textContent =
             "¡Hoy celebramos nuestro amor!";
+
         return;
     }
 
@@ -76,10 +84,12 @@ function iniciarInvitacion() {
     foto.src = CONFIG.fotoPareja;
 
     foto.onerror = () => {
+
         console.error(
             "No se encontró la fotografía:",
             CONFIG.fotoPareja
         );
+
     };
 
     // Mostrar recepción
@@ -87,37 +97,85 @@ function iniciarInvitacion() {
 
     // Configurar música
     const audio = $("musica");
+
     audio.src = CONFIG.musica;
+    audio.loop = true;
     audio.load();
 
-    $("botonMusica").addEventListener("click", async() => {
-        if (audio.paused) {
-            try {
-                await audio.play();
-
-                $("botonMusica").textContent =
-                    "Ⅱ Pausar música";
-
-            } catch (error) {
-                console.error("Error de música:", error);
-
-                alert(
-                    "No se pudo reproducir la música. Revisa musica.mp3."
-                );
-            }
-
-        } else {
-            audio.pause();
-
-            $("botonMusica").textContent =
-                "♪ Música";
-        }
-    });
-
-    // Iniciar contador
+    // Cuenta regresiva
     actualizarCuentaRegresiva();
 
     setInterval(actualizarCuentaRegresiva, 1000);
+}
+
+// ======================================
+// PANTALLA DE BIENVENIDA Y MÚSICA
+// ======================================
+
+function configurarBienvenida() {
+
+    const pantalla = $("pantallaBienvenida");
+    const boton = $("abrirInvitacion");
+    const audio = $("musica");
+    const botonMusica = $("botonMusica");
+
+    boton.addEventListener("click", async() => {
+
+        boton.disabled = true;
+        boton.textContent = "Abriendo nuestra invitación...";
+
+        try {
+
+            // La reproducción comienza por la acción del invitado
+            await audio.play();
+
+            // Mostrar el control de música
+            botonMusica.hidden = false;
+            botonMusica.textContent = "Ⅱ Pausar música";
+
+            // Ocultar pantalla de bienvenida
+            pantalla.classList.add("oculta");
+
+            document.body.style.overflow = "auto";
+
+        } catch (error) {
+
+            console.error("Error al reproducir música:", error);
+
+            boton.disabled = false;
+            boton.textContent = "Volver a intentar ♡";
+
+        }
+
+    });
+
+    // Control para pausar y continuar la música
+    botonMusica.addEventListener("click", async() => {
+
+        if (audio.paused) {
+
+            try {
+
+                await audio.play();
+
+                botonMusica.textContent = "Ⅱ Pausar música";
+
+            } catch (error) {
+
+                console.error("Error al reproducir música:", error);
+
+            }
+
+        } else {
+
+            audio.pause();
+
+            botonMusica.textContent = "♪ Activar música";
+
+        }
+
+    });
+
 }
 
 // ======================================
@@ -138,16 +196,20 @@ function configurarFormulario() {
         );
 
         if (!CONFIG.googleSheetsURL) {
+
             mensaje.textContent =
                 "Falta configurar Google Sheets.";
+
             return;
         }
 
         const nombre = formulario.elements.nombre.value.trim();
 
         if (!nombre) {
+
             mensaje.textContent =
                 "Escribe tu nombre completo.";
+
             return;
         }
 
@@ -185,8 +247,11 @@ function configurarFormulario() {
 
             boton.textContent =
                 "Enviar confirmación";
+
         }
+
     });
+
 }
 
 // ======================================
@@ -195,8 +260,12 @@ function configurarFormulario() {
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    document.body.style.overflow = "hidden";
+
     iniciarInvitacion();
 
     configurarFormulario();
+
+    configurarBienvenida();
 
 });
