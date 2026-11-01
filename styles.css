@@ -1,6 +1,7 @@
 /* =========================================
    INVITACIÓN DE BODA
    JULISA & JIMMY
+   DISEÑO RESPONSIVE PARA TODOS LOS DISPOSITIVOS
 ========================================= */
 
 :root {
@@ -21,15 +22,24 @@
 
 html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
     margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
     background: var(--rosa-claro);
     color: var(--texto);
     font-family: Georgia, serif;
     text-align: center;
     overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
 }
 
 
@@ -40,7 +50,7 @@ body {
 @keyframes aparecer {
     from {
         opacity: 0;
-        transform: translateY(18px);
+        transform: translateY(15px);
     }
     to {
         opacity: 1;
@@ -54,17 +64,17 @@ body {
         transform: translateY(0);
     }
     50% {
-        transform: translateY(-5px);
+        transform: translateY(-4px);
     }
 }
 
 @keyframes brilloSello {
     0%,
     100% {
-        box-shadow: 0 3px 8px rgba(117, 84, 90, .18);
+        box-shadow: 0 3px 10px rgba(117, 84, 90, .15);
     }
     50% {
-        box-shadow: 0 3px 17px rgba(169, 111, 122, .35);
+        box-shadow: 0 4px 17px rgba(169, 111, 122, .35);
     }
 }
 
@@ -78,12 +88,14 @@ body {
     inset: 0;
     z-index: 9999;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    width: 100%;
     min-height: 100vh;
     min-height: 100dvh;
+    padding: max(24px, env(safe-area-inset-top)) 16px max(24px, env(safe-area-inset-bottom));
+    overflow-x: hidden;
     overflow-y: auto;
-    padding: 20px;
     background: radial-gradient( circle at center, #FFFFFF 0%, #FBF5F4 65%, #F1E5E3 100%);
     transition: opacity .9s ease, visibility .9s ease;
 }
@@ -96,14 +108,22 @@ body {
 
 
 /* =========================================
-   ESCENA DEL SOBRE
+   ESCENA COMPLETA DEL SOBRE
+
+   IMPORTANTE:
+   Ya no utilizamos posiciones absolutas
+   para organizar la carta y el botón.
 ========================================= */
 
 .sobre-escena {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
-    max-width: 440px;
-    height: 500px;
+    max-width: 460px;
+    height: auto;
+    min-height: 0;
     margin: auto;
     animation: aparecer 1.2s ease;
 }
@@ -114,17 +134,22 @@ body {
 ========================================= */
 
 .carta-sobre {
-    position: absolute;
-    top: 0;
-    left: 7%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     width: 86%;
-    height: 300px;
-    padding: 25px 15px;
+    max-width: 390px;
+    min-height: 310px;
+    padding: 27px 18px 75px;
+    margin: 0;
     background: var(--marfil);
     border: 1px solid var(--rosa-suave);
     box-shadow: 0 5px 20px rgba(117, 84, 90, .10);
     z-index: 1;
     text-align: center;
+    overflow: hidden;
     animation: flotarCarta 5s ease-in-out infinite;
 }
 
@@ -132,31 +157,36 @@ body {
 /* Etiqueta superior */
 
 .carta-sobre .bienvenida-etiqueta {
-    font-size: 9px;
-    letter-spacing: 3px;
-    line-height: 1.8;
+    width: 100%;
+    margin: 0 0 12px;
     color: var(--rosa-oscuro);
-    margin: 0 0 10px;
+    font-size: 10px;
+    letter-spacing: 3px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
 }
 
 
 /* Adorno */
 
 .carta-sobre .adorno {
-    font-size: 24px;
     color: var(--rosa);
-    margin: 10px 0;
+    font-size: 26px;
+    margin: 5px 0 8px;
 }
 
 
-/* Nombres */
+/* Nombres de los novios */
 
 .carta-sobre h1 {
-    font-size: clamp(32px, 7vw, 45px);
-    font-weight: normal;
+    width: 100%;
+    margin: 8px 0;
     color: var(--rosa-oscuro);
-    margin: 12px 0;
+    font-size: clamp(27px, 6.5vw, 44px);
+    font-weight: normal;
     line-height: 1.2;
+    overflow-wrap: normal;
+    word-break: normal;
 }
 
 .carta-sobre h1 span {
@@ -167,10 +197,11 @@ body {
 /* Fecha */
 
 .carta-sobre .bienvenida-fecha {
+    margin: 10px 0;
+    color: var(--rosa-oscuro);
     font-size: 12px;
     letter-spacing: 4px;
-    color: var(--rosa-oscuro);
-    margin: 12px 0;
+    line-height: 1.6;
 }
 
 
@@ -179,7 +210,8 @@ body {
 .carta-sobre .linea-dorada {
     width: 55px;
     height: 1px;
-    margin: 16px auto;
+    min-height: 1px;
+    margin: 13px auto;
     background: var(--rosa);
 }
 
@@ -187,11 +219,14 @@ body {
 /* Mensaje */
 
 .carta-sobre .bienvenida-texto {
+    width: 100%;
+    max-width: 310px;
+    margin: 0 auto;
+    color: var(--texto);
     font-size: 12px;
     line-height: 1.6;
-    color: var(--texto);
-    max-width: 300px;
-    margin: auto;
+    font-style: italic;
+    overflow-wrap: break-word;
 }
 
 
@@ -200,11 +235,13 @@ body {
 ========================================= */
 
 .sobre {
-    position: absolute;
-    top: 205px;
-    left: 0;
+    position: relative;
     width: 100%;
-    height: 190px;
+    height: 180px;
+    flex-shrink: 0;
+    /* El sobre cubre solamente la parte
+       inferior de la carta */
+    margin-top: -75px;
     z-index: 3;
     filter: drop-shadow(0 8px 8px rgba(117, 84, 90, .13));
 }
@@ -231,88 +268,92 @@ body {
 }
 
 
-/* Solapa superior */
+/* Solapa triangular */
 
 .sobre-solapa {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 115px;
+    height: 112px;
     background: linear-gradient( 180deg, #D9AEB5, #E8C9CD);
     clip-path: polygon( 0 0, 100% 0, 50% 100%);
     z-index: 3;
 }
 
 
-/* Sello central */
+/* Sello */
 
 .sobre-sello {
     position: absolute;
+    top: 72px;
     left: 50%;
-    top: 77px;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 43px;
-    height: 43px;
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
     background: var(--rosa-oscuro);
     border: 3px solid #DDB8BE;
-    color: white;
-    font-size: 23px;
+    color: #FFFFFF;
+    font-size: 25px;
     z-index: 4;
-    box-shadow: 0 3px 8px rgba(117, 84, 90, .20);
     animation: brilloSello 4s ease-in-out infinite;
 }
 
 
 /* =========================================
    BOTÓN ABRIR INVITACIÓN
+
+   Su posición ahora es automática.
 ========================================= */
 
 #abrirInvitacion {
-    position: absolute;
-    top: 410px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
     display: block;
-    width: 230px;
-    margin: 0;
-    padding: 15px 20px;
+    width: min(230px, 85%);
+    min-height: 52px;
+    margin: 23px auto 0;
+    padding: 14px 18px;
     border: none;
-    border-radius: 35px;
+    border-radius: 40px;
     background: var(--rosa);
-    color: white;
+    color: #FFFFFF;
     font-family: Georgia, serif;
     font-size: 15px;
     letter-spacing: 1px;
+    line-height: 1.4;
     cursor: pointer;
     z-index: 5;
     box-shadow: 0 5px 15px rgba(117, 84, 90, .15);
-    transition: background .3s ease, box-shadow .3s ease;
+    transition: background .3s ease, transform .3s ease, box-shadow .3s ease;
 }
 
 #abrirInvitacion:hover {
     background: var(--rosa-oscuro);
+    transform: translateY(-2px);
     box-shadow: 0 7px 20px rgba(117, 84, 90, .22);
 }
 
 
 /* =========================================
-   TEXTO INFERIOR DEL SOBRE
+   TEXTO INFERIOR
 ========================================= */
 
 .sobre-escena .bienvenida-pie {
-    position: absolute;
-    top: 465px;
-    left: 0;
+    position: relative;
     width: 100%;
-    font-size: 8px;
-    letter-spacing: 1.5px;
-    line-height: 1.8;
+    max-width: 350px;
+    margin: 17px auto 0;
+    padding: 0 5px;
     color: var(--rosa-oscuro);
+    font-size: 8px;
+    letter-spacing: 1.7px;
+    line-height: 1.8;
+    text-align: center;
+    overflow-wrap: break-word;
     z-index: 5;
 }
 
@@ -322,12 +363,13 @@ body {
 ========================================= */
 
 .invitacion {
-    width: min(100%, 760px);
-    margin: auto;
-    background: var(--blanco);
+    width: 100%;
+    max-width: 760px;
     min-height: 100vh;
+    margin: 0 auto;
     padding: 35px 22px;
-    box-shadow: 0 0 30px rgba(117, 84, 90, 0.06);
+    background: var(--blanco);
+    box-shadow: 0 0 30px rgba(117, 84, 90, .06);
 }
 
 
@@ -336,27 +378,30 @@ body {
 ========================================= */
 
 .portada {
+    width: 100%;
     padding: 55px 15px 40px;
     border: 1px solid var(--rosa-suave);
     background: linear-gradient( 180deg, #FFFFFF 0%, #FFFAFB 100%);
 }
 
 .sobrelinea {
-    letter-spacing: 4px;
-    font-size: 12px;
     color: var(--rosa-oscuro);
+    font-size: 12px;
+    letter-spacing: 4px;
+    line-height: 1.8;
 }
 
 .adorno-portada {
-    font-size: 24px;
-    color: var(--rosa);
     margin: 20px 0;
+    color: var(--rosa);
+    font-size: 24px;
 }
 
 h1 {
-    font-size: clamp(38px, 8vw, 68px);
-    font-weight: normal;
     color: var(--rosa-oscuro);
+    font-size: clamp(35px, 7vw, 68px);
+    font-weight: normal;
+    line-height: 1.2;
     margin: 20px 0;
 }
 
@@ -365,21 +410,24 @@ h1 span {
 }
 
 .fecha {
-    letter-spacing: 3px;
     color: var(--texto);
+    font-size: 14px;
+    letter-spacing: 3px;
+    line-height: 1.7;
 }
 
 
-/* Fotografía de la pareja */
+/* Fotografía */
 
 .foto {
     display: block;
     width: min(100%, 420px);
+    height: auto;
     max-height: 520px;
     object-fit: cover;
     margin: 25px auto;
-    border-radius: 5px;
     border: 3px solid var(--rosa-claro);
+    border-radius: 5px;
 }
 
 
@@ -388,19 +436,29 @@ h1 span {
 ========================================= */
 
 .seccion {
+    width: 100%;
     padding: 48px 12px;
     border-bottom: 1px solid var(--rosa-suave);
 }
 
-h2 {
+.seccion h2 {
     color: var(--rosa-oscuro);
-    font-size: 30px;
+    font-size: clamp(24px, 5vw, 30px);
     font-weight: normal;
+    line-height: 1.4;
+    overflow-wrap: break-word;
 }
 
-h3 {
-    font-weight: normal;
+.seccion h3 {
     color: var(--texto);
+    font-weight: normal;
+    line-height: 1.5;
+}
+
+.seccion>p {
+    font-size: 15px;
+    line-height: 1.8;
+    overflow-wrap: break-word;
 }
 
 .adorno-seccion {
@@ -410,9 +468,10 @@ h3 {
 }
 
 .frase {
-    font-style: italic;
-    line-height: 1.8;
     color: var(--texto);
+    font-style: italic;
+    line-height: 1.9;
+    font-size: 16px;
 }
 
 
@@ -426,63 +485,68 @@ h3 {
 }
 
 .vestimenta h2 {
-    font-family: Georgia, serif;
-    letter-spacing: 2px;
-    font-size: 27px;
-    line-height: 1.5;
     color: var(--texto);
+    font-family: Georgia, serif;
+    font-size: clamp(22px, 5vw, 27px);
+    letter-spacing: 2px;
+    line-height: 1.5;
     margin-bottom: 20px;
 }
 
 .vestimenta>p {
+    margin: 25px auto 35px;
+    color: var(--texto);
     font-size: 17px;
     line-height: 1.7;
-    color: var(--texto);
-    margin: 25px 0 35px;
 }
 
 
-/* Contenedor de imágenes */
+/* Contenedor de las ilustraciones */
 
 .vestimenta-contenedor {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
+    align-items: end;
+    gap: clamp(8px, 4vw, 25px);
+    width: 100%;
     max-width: 440px;
     margin: 0 auto;
-    align-items: end;
 }
 
 
-/* Elementos individuales */
+/* Cada ilustración */
 
 .vestimenta-item {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
+    min-width: 0;
 }
 
 
-/* Ilustraciones */
+/* Imágenes */
 
 .vestimenta-item img {
     display: block;
     width: 100%;
     max-width: 175px;
-    height: 230px;
+    height: clamp(165px, 28vw, 230px);
     object-fit: contain;
+    object-position: center bottom;
     margin: 0 auto;
 }
 
 
-/* Descripción */
+/* Textos de vestimenta */
 
 .vestimenta-item p {
+    width: 100%;
+    margin: 12px 0 0;
+    color: var(--texto);
     font-size: 15px;
     line-height: 1.5;
-    color: var(--texto);
-    margin: 12px 0 0;
+    overflow-wrap: break-word;
 }
 
 
@@ -492,9 +556,12 @@ h3 {
 
 a {
     display: inline-block;
+    max-width: 100%;
     margin: 12px;
     color: var(--rosa-oscuro);
     text-decoration: none;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
     transition: color .3s ease;
 }
 
@@ -504,45 +571,61 @@ a:hover {
 
 
 /* =========================================
-   FORMULARIOS
+   FORMULARIO DE CONFIRMACIÓN
 ========================================= */
 
-input,
-select,
-button {
-    display: block;
+#formularioRSVP {
     width: 100%;
-    max-width: 420px;
-    margin: 12px auto;
-    padding: 14px;
-    border: 1px solid var(--rosa-suave);
-    border-radius: 5px;
-    background: #FFFAFB;
-    color: var(--texto);
-    font: inherit;
+    max-width: 440px;
+    margin: 25px auto 0;
 }
 
+#formularioRSVP input,
+#formularioRSVP select {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    margin: 13px auto;
+    padding: 14px;
+    border: 1px solid var(--rosa-suave);
+    border-radius: 7px;
+    background: #FFFAFB;
+    color: var(--texto);
+    font-family: Georgia, serif;
+    font-size: 16px;
+    line-height: 1.5;
+    appearance: auto;
+}
 
-/* Campos seleccionados */
-
-input:focus,
-select:focus {
+#formularioRSVP input:focus,
+#formularioRSVP select:focus {
     outline: 2px solid var(--rosa-suave);
     border-color: var(--rosa);
 }
 
 
-/* Botones generales */
+/* Botones */
 
 button {
+    font-family: Georgia, serif;
+}
+
+#formularioRSVP button {
+    display: block;
+    width: 100%;
+    min-height: 48px;
+    margin: 15px auto;
+    padding: 14px 18px;
+    border: none;
+    border-radius: 7px;
     background: var(--rosa);
     color: white;
+    font-size: 15px;
     cursor: pointer;
-    border: none;
     transition: background .3s ease;
 }
 
-button:hover {
+#formularioRSVP button:hover {
     background: var(--rosa-oscuro);
 }
 
@@ -552,15 +635,13 @@ button:disabled {
 }
 
 
-/* =========================================
-   MENSAJE DE CONFIRMACIÓN
-========================================= */
+/* Mensaje del formulario */
 
 #mensajeRSVP {
+    color: var(--rosa-oscuro);
     font-size: 14px;
     line-height: 1.7;
-    color: var(--rosa-oscuro);
-    margin-top: 15px;
+    overflow-wrap: break-word;
 }
 
 
@@ -577,10 +658,10 @@ button:disabled {
 }
 
 .despedida-pie {
-    letter-spacing: 4px;
-    font-size: 12px;
-    color: var(--rosa-oscuro);
     margin-top: 25px;
+    color: var(--rosa-oscuro);
+    font-size: 12px;
+    letter-spacing: 4px;
 }
 
 
@@ -590,14 +671,19 @@ button:disabled {
 
 #botonMusica {
     position: fixed;
-    right: 15px;
-    bottom: 15px;
+    right: max(15px, env(safe-area-inset-right));
+    bottom: max(15px, env(safe-area-inset-bottom));
     z-index: 100;
+    display: block;
     width: auto;
-    border-radius: 30px;
+    max-width: 180px;
+    margin: 0;
     padding: 12px 20px;
+    border: none;
+    border-radius: 30px;
     background: var(--rosa);
     color: white;
+    font-size: 14px;
     box-shadow: 0 3px 12px rgba(117, 84, 90, .18);
 }
 
@@ -607,138 +693,253 @@ button:disabled {
 ========================================= */
 
 #cuentaRegresiva {
-    font-size: 20px;
-    line-height: 1.8;
-    color: var(--rosa-oscuro);
+    display: block;
+    width: 100%;
     margin-top: 20px;
+    color: var(--rosa-oscuro);
+    font-size: clamp(15px, 3vw, 20px);
+    line-height: 1.8;
+    overflow-wrap: break-word;
 }
 
 
 /* =========================================
-   DISEÑO PARA TABLETS
+   TABLETS
 ========================================= */
 
-@media (max-width: 768px) {
+@media (min-width: 600px) and (max-width: 1024px) {
     .invitacion {
-        width: 100%;
-        padding: 25px 18px;
-    }
-    .portada {
-        padding: 45px 12px;
-    }
-    .vestimenta-contenedor {
-        max-width: 400px;
-    }
-}
-
-
-/* =========================================
-   DISEÑO PARA CELULARES
-========================================= */
-
-@media (max-width: 480px) {
-    /* Pantalla de bienvenida */
-    .pantalla-bienvenida {
-        padding: 15px;
+        max-width: 760px;
+        padding: 35px 25px;
     }
     .sobre-escena {
-        max-width: 380px;
-        height: 490px;
+        max-width: 440px;
+    }
+    .portada {
+        padding: 50px 20px;
+    }
+    .seccion {
+        padding: 50px 20px;
+    }
+    .vestimenta-item img {
+        height: 220px;
+    }
+}
+
+
+/* =========================================
+   CELULARES
+========================================= */
+
+@media (max-width: 599px) {
+    /* Pantalla de bienvenida */
+    .pantalla-bienvenida {
+        padding: 20px 14px;
+        align-items: center;
+    }
+    .sobre-escena {
+        max-width: 400px;
     }
     /* Carta */
     .carta-sobre {
-        left: 5%;
         width: 90%;
-        height: 290px;
-        padding: 23px 10px;
+        min-height: 295px;
+        padding: 24px 13px 70px;
+    }
+    .carta-sobre .bienvenida-etiqueta {
+        font-size: 9px;
+        letter-spacing: 2.5px;
     }
     .carta-sobre h1 {
-        font-size: clamp(30px, 8vw, 39px);
+        font-size: clamp(27px, 7.5vw, 39px);
+    }
+    .carta-sobre .bienvenida-fecha {
+        font-size: 11px;
+        letter-spacing: 3px;
+    }
+    .carta-sobre .bienvenida-texto {
+        font-size: 11px;
+        line-height: 1.5;
     }
     /* Sobre */
     .sobre {
-        top: 195px;
-        height: 180px;
+        height: 165px;
+        margin-top: -70px;
     }
     .sobre-solapa {
-        height: 110px;
+        height: 100px;
     }
     .sobre-sello {
-        top: 73px;
+        top: 65px;
+        width: 43px;
+        height: 43px;
+        font-size: 23px;
     }
     /* Botón */
     #abrirInvitacion {
-        top: 395px;
+        width: min(230px, 85%);
+        min-height: 50px;
+        margin-top: 20px;
+        font-size: 14px;
     }
-    /* Mensaje inferior */
+    /* Texto inferior */
     .sobre-escena .bienvenida-pie {
-        top: 450px;
+        max-width: 330px;
+        margin-top: 16px;
+        padding: 0 10px;
         font-size: 7px;
+        letter-spacing: 1.2px;
     }
     /* Invitación */
     .invitacion {
+        width: 100%;
         padding: 15px 12px;
     }
     .portada {
-        padding: 40px 10px;
+        padding: 38px 12px;
     }
+    .sobrelinea {
+        font-size: 10px;
+        letter-spacing: 3px;
+    }
+    .portada h1 {
+        font-size: clamp(34px, 9vw, 48px);
+    }
+    /* Fotografía */
     .foto {
-        max-width: 100%;
+        width: 100%;
+        height: auto;
         max-height: 450px;
     }
     /* Secciones */
     .seccion {
-        padding: 40px 10px;
+        padding: 38px 10px;
+    }
+    .seccion h2 {
+        font-size: 26px;
     }
     /* Vestimenta */
     .vestimenta {
-        padding: 45px 10px;
+        padding: 42px 8px;
     }
     .vestimenta h2 {
-        font-size: 24px;
+        font-size: 22px;
+        letter-spacing: 1.5px;
     }
     .vestimenta>p {
-        font-size: 15px;
+        font-size: 14px;
+        margin: 20px 0 30px;
     }
     .vestimenta-contenedor {
-        gap: 10px;
+        gap: 8px;
     }
     .vestimenta-item img {
-        height: 190px;
+        height: clamp(155px, 45vw, 190px);
     }
     .vestimenta-item p {
-        font-size: 13px;
+        font-size: 12px;
+    }
+    /* Formularios */
+    #formularioRSVP input,
+    #formularioRSVP select {
+        font-size: 16px;
+        padding: 13px;
     }
     /* Cuenta regresiva */
     #cuentaRegresiva {
-        font-size: 17px;
+        font-size: 16px;
+        line-height: 1.9;
     }
-    /* Música */
+    /* Botón de música */
     #botonMusica {
         right: 12px;
         bottom: 12px;
-        padding: 11px 17px;
+        padding: 11px 16px;
     }
 }
 
 
 /* =========================================
    CELULARES PEQUEÑOS
+   320px - 360px
 ========================================= */
 
-@media (max-width: 350px) {
-    .sobre-escena {
-        transform: scale(.92);
-        transform-origin: top center;
+@media (max-width: 360px) {
+    .pantalla-bienvenida {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .carta-sobre {
+        min-height: 285px;
+        padding: 22px 10px 70px;
+    }
+    .carta-sobre .bienvenida-etiqueta {
+        font-size: 8px;
+        letter-spacing: 2px;
     }
     .carta-sobre h1 {
-        font-size: 30px;
+        font-size: 28px;
+    }
+    .carta-sobre .bienvenida-fecha {
+        font-size: 10px;
+        letter-spacing: 2.5px;
+    }
+    .carta-sobre .bienvenida-texto {
+        font-size: 10px;
+    }
+    .sobre {
+        height: 155px;
+        margin-top: -65px;
+    }
+    .sobre-solapa {
+        height: 90px;
+    }
+    .sobre-sello {
+        top: 59px;
+        width: 40px;
+        height: 40px;
+    }
+    .sobre-escena .bienvenida-pie {
+        font-size: 6.5px;
+        letter-spacing: 1px;
     }
     .vestimenta-item img {
-        height: 165px;
+        height: 155px;
     }
     .vestimenta-item p {
-        font-size: 12px;
+        font-size: 11px;
+    }
+}
+
+
+/* =========================================
+   PANTALLAS BAJAS Y CELULARES HORIZONTALES
+========================================= */
+
+@media (max-height: 650px) {
+    .pantalla-bienvenida {
+        align-items: flex-start;
+    }
+    .sobre-escena {
+        margin-top: 12px;
+        margin-bottom: 12px;
+    }
+    .carta-sobre {
+        min-height: 275px;
+        padding-top: 20px;
+    }
+    .sobre {
+        height: 150px;
+        margin-top: -65px;
+    }
+    .sobre-solapa {
+        height: 90px;
+    }
+    .sobre-sello {
+        top: 58px;
+    }
+    #abrirInvitacion {
+        margin-top: 17px;
     }
 }
 
